@@ -7,6 +7,8 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Styles/RadioButtonMenu.xaml"/>
+                <ResourceDictionary Source="Styles/CheckBoxSettings.xaml"/>
+                <ResourceDictionary Source="Styles/TextBlockSettings.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
