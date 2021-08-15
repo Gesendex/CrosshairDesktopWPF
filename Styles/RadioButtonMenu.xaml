@@ -1,0 +1,32 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style TargetType="RadioButton" 
+           x:Key="RadioButtonMenu">
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Background" Value="#411c73"/>
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="Foreground" Value="#c3bacf"/>
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="Margin" Value="1,1,1,0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RadioButton">
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="Background" Value="#582e85"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Cursor" Value="Hand"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                    <Grid>
+                        <Border Background="{TemplateBinding Background}" BorderThickness="2" BorderBrush="DarkGray">
+                            <ContentPresenter VerticalAlignment="Center" 
+                                                 HorizontalAlignment="Center"/>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>
