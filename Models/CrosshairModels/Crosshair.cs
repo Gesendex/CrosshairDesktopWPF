@@ -7,7 +7,7 @@ using System.Windows.Controls;
 
 namespace CrosshairDesktopWPF.Models.CrosshairModels
 {
-    class Crosshair
+    public class Crosshair
     {
         public Image CrosshairImage { get; set; }
     }

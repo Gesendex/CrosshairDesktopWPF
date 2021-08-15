@@ -20,11 +20,11 @@
             <ColumnDefinition Width="4*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0" Margin="1">
-            <RadioButton x:Name="rbCreate" Content="Create crosshair"  Style="{StaticResource RadioButtonMenu}"/>
-            <RadioButton x:Name="rbSettings" Content="Settings" IsChecked="True" Style="{StaticResource RadioButtonMenu}"/>
+            <RadioButton x:Name="rbCreate" Content="Create crosshair" IsChecked="True" Style="{StaticResource RadioButtonMenu}"/>
+            <RadioButton x:Name="rbSettings" Content="Settings"  Style="{StaticResource RadioButtonMenu}"/>
             <RadioButton x:Name="rbSave" Content="Save" Style="{StaticResource RadioButtonMenu}"/>
         </StackPanel>
-        <StackPanel Grid.Column="1" Margin="4" Visibility="Visible">
+        <StackPanel Grid.Column="1" Margin="4">
             <StackPanel Orientation="Horizontal" Margin="4" 
                         Visibility="{Binding ElementName=rbSettings, Path=IsChecked , Converter={StaticResource BoolToVisibility}}">
                 <TextBlock Text="Display width: " Width="130" FontSize="16" Foreground="AntiqueWhite"/>
@@ -36,6 +36,17 @@
                 <TextBlock Text="Display height: " Width="130" FontSize="16" Foreground="AntiqueWhite"/>
                 <TextBox Width="100" FontSize="16"
                          Text="{Binding DisplayHeight}"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Margin="4"  
+                        Visibility="{Binding ElementName=rbCreate, Path=IsChecked , Converter={StaticResource BoolToVisibility}}">
+                <DockPanel Background="White">
+                    <Image  Width="200" Height="200" HorizontalAlignment="Center" 
+                            Source="pack://application:,,,/Crosshairs/red-crosshair-png-8.png"/>
+                </DockPanel>
+                <RadioButton Content="Arrow up" FontSize="16" Foreground="AntiqueWhite"/>
+                <RadioButton Content="Arrow left" FontSize="16" Foreground="AntiqueWhite"/>
+                <RadioButton Content="Arrow down" FontSize="16" Foreground="AntiqueWhite"/>
+                <RadioButton Content="Arrow right" FontSize="16" Foreground="AntiqueWhite"/>
             </StackPanel>
         </StackPanel>
     </Grid>
