@@ -41,8 +41,8 @@
             <StackPanel Orientation="Vertical" Margin="4"  
                         Visibility="{Binding ElementName=rbCreate, Path=IsChecked , Converter={StaticResource BoolToVisibility}}">
                 <DockPanel Background="White">
-                    <Image  Width="150" Height="150" HorizontalAlignment="Center" 
-                            Source="pack://application:,,,/Crosshairs/red-crosshair-png-8.png"/>
+                    <Canvas  Width="150" Height="150" HorizontalAlignment="Center"/>
+                    <!--Source="pack://application:,,,/Crosshairs/red-crosshair-png-8.png"-->
                 </DockPanel>
                 <StackPanel Orientation ="Horizontal">
                     <CheckBox Content="Arrow up"   Style="{DynamicResource CheckBoxArrowSettings}" IsChecked="True" />
@@ -57,11 +57,11 @@
                     <colorpicker:PortableColorPicker x:Name="cpColor" SelectedColor="Cyan" HorizontalAlignment="Left"/>
                 </StackPanel>
                 <TextBlock Text="Lenght" Style="{StaticResource TextBlockSliderSettings}"/>
-                <Slider Maximum="20" SmallChange="1" Value="10"/>
+                <Slider Maximum="20" SmallChange="1" Value="{Binding Lenght, UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBlock Text="Width" Style="{StaticResource TextBlockSliderSettings}"/>
-                <Slider SmallChange="1" Value="2"/>
+                <Slider SmallChange="1" Value="{Binding Width, UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBlock Text="Gap"  Style="{StaticResource TextBlockSliderSettings}"/>
-                <Slider Maximum="20" SmallChange="1" Value="10"/>
+                <Slider Maximum="20" SmallChange="1" Value="{Binding Gap, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
         </StackPanel>
     </Grid>
