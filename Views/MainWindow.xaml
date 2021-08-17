@@ -8,7 +8,7 @@
         xmlns:cnvt="clr-namespace:CrosshairDesktopWPF.Views.DataConverters"
         xmlns:colorpicker="clr-namespace:ColorPicker;assembly=ColorPicker"
         mc:Ignorable="d"
-        Title="CrosshairCreator" Height="450" Width="800" Background="Purple">
+        Title="CrosshairCreator" Height="450" Width="800" Background="Purple" Loaded="Window_Loaded">
     <Window.Resources>
         <cnvt:BoolToVisibilityConverter x:Key="BoolToVisibility"/>
     </Window.Resources>
@@ -41,7 +41,7 @@
             <StackPanel Orientation="Vertical" Margin="4"  
                         Visibility="{Binding ElementName=rbCreate, Path=IsChecked , Converter={StaticResource BoolToVisibility}}">
                 <DockPanel Background="White">
-                    <Canvas  Width="150" Height="150" HorizontalAlignment="Center"/>
+                    <Canvas Name="cnvCanvas" Width="150" Height="150" HorizontalAlignment="Center"/>
                     <!--Source="pack://application:,,,/Crosshairs/red-crosshair-png-8.png"-->
                 </DockPanel>
                 <StackPanel Orientation ="Horizontal">
