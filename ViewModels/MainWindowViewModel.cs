@@ -7,18 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace CrosshairDesktopWPF.ViewModels
 {
     class MainWindowViewModel : BaseVM
     {
-        
+        #region Properties
         #region DisplaySize
         private Size DisplaySize;
         public double DisplayWidth
         {
             get { return DisplaySize.Width; }
-            set { DisplaySize.Width= value; OnPropertyChanged(); }
+            set { DisplaySize.Width = value; OnPropertyChanged(); }
         }
 
         public double DisplayHeight
@@ -51,6 +53,20 @@ namespace CrosshairDesktopWPF.ViewModels
             get { return _currentCross.ColorCH; }
             set { _currentCross.ColorCH = value; OnPropertyChanged(); }
         }
+        #endregion
+        #region cnvCanvas
+        private Canvas _cnvCanvas;
+
+        public Canvas CnvCanvas
+        {
+            get { return _cnvCanvas; }
+            set { _cnvCanvas = value; }
+        }
+
+        #endregion
+        #endregion
+
+        #region Commands
         #endregion
         public MainWindowViewModel()
         {

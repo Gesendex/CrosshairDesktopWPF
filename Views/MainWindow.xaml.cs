@@ -66,7 +66,7 @@ namespace CrosshairDesktopWPF.Views
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             SaveCanvasImage();
-            spCanvas.InvalidateArrange();
+            spCanvas.InvalidateArrange();//Необходимо для того, чтобы после сохранения не канвас не менял местоположение
         }
     }
 
