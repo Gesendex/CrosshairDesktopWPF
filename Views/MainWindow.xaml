@@ -23,7 +23,6 @@
         <StackPanel Grid.Column="0" Margin="1">
             <RadioButton x:Name="rbCreate" Content="Create crosshair" IsChecked="True" Style="{StaticResource RadioButtonMenu}"/>
             <RadioButton x:Name="rbSettings" Content="Settings"  Style="{StaticResource RadioButtonMenu}"/>
-            <RadioButton x:Name="rbSave" Content="Save" Style="{StaticResource RadioButtonMenu}"/>
         </StackPanel>
         <StackPanel Grid.Column="1" Margin="4">
             <StackPanel Orientation="Horizontal" Margin="4" 
@@ -40,10 +39,10 @@
             </StackPanel>
             <StackPanel Orientation="Vertical" Margin="4"  
                         Visibility="{Binding ElementName=rbCreate, Path=IsChecked , Converter={StaticResource BoolToVisibility}}">
-                <DockPanel Background="White">
+                <StackPanel Name="spCanvas" Background="White">
                     <Canvas Name="cnvCanvas" Width="150" Height="150" HorizontalAlignment="Center"/>
                     <!--Source="pack://application:,,,/Crosshairs/red-crosshair-png-8.png"-->
-                </DockPanel>
+                </StackPanel>
                 <StackPanel Orientation ="Horizontal">
                     <CheckBox Content="Arrow up"   Style="{DynamicResource CheckBoxArrowSettings}" IsChecked="True" />
                     <CheckBox Content="Arrow down" Style="{StaticResource CheckBoxArrowSettings}" IsChecked="True"/>
@@ -62,6 +61,10 @@
                 <Slider SmallChange="1" Value="{Binding Width, UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBlock Text="Gap"  Style="{StaticResource TextBlockSliderSettings}"/>
                 <Slider Maximum="20" SmallChange="1" Value="{Binding Gap, UpdateSourceTrigger=PropertyChanged}"/>
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="Save" Style="{StaticResource ButtonSettings}" Click="Button_Click"/>
+                </StackPanel>
+            
             </StackPanel>
         </StackPanel>
     </Grid>
