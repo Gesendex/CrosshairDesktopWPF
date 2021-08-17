@@ -39,8 +39,8 @@
             </StackPanel>
             <StackPanel Orientation="Vertical" Margin="4"  
                         Visibility="{Binding ElementName=rbCreate, Path=IsChecked , Converter={StaticResource BoolToVisibility}}">
-                <StackPanel Name="spCanvas" Background="White">
-                    <Canvas Name="cnvCanvas" Width="150" Height="150" HorizontalAlignment="Center"/>
+                <StackPanel x:Name="spCanvas" Background="White">
+                    <Canvas x:Name="cnvCanvas" Width="150" Height="150" HorizontalAlignment="Center"/>
                     <!--Source="pack://application:,,,/Crosshairs/red-crosshair-png-8.png"-->
                 </StackPanel>
                 <StackPanel Orientation ="Horizontal">
