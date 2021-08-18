@@ -11,7 +11,7 @@ namespace CrosshairDesktopWPF.Models.CanvasDraw
 {
     public static class GeometryFigure
     {
-        public static Rectangle CreateRectangle( int left, int top, int width, int height, int strokeThickness, Brush bFill, Brush bStroke = null)
+        public static Rectangle CreateRectangle( double left, double top, double width, double height, double strokeThickness, Brush bFill, Brush bStroke = null)
         {
             var rect = new Rectangle();
             rect.Fill = bFill;
