@@ -1,8 +1,10 @@
-﻿using CrosshairDesktopWPF.Models.CanvasDraw;
+﻿using CrosshairDesktopWPF.Core;
+using CrosshairDesktopWPF.Models.CanvasDraw;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -22,6 +24,9 @@ namespace CrosshairDesktopWPF.Views
     /// </summary>
     public partial class MainWindow : Window
     {
+        public double RelativeUnit { get; set; }
+        public double Center { get; set; }
+        public bool InitFlag { get; set; }
         public MainWindow()
         {
             InitializeComponent();
@@ -29,24 +34,43 @@ namespace CrosshairDesktopWPF.Views
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            RelativeUnit = cnvCanvas.ActualWidth / sldrSize.Value;
+            Center = cnvCanvas.ActualWidth / 2;
             DrawCross();
+            InitFlag = true;
         }
 
         private void DrawCross()
         {
-            cnvCanvas.Children.Insert(0, GeometryFigure.CreateRectangle(0, 0, (int)cnvCanvas.ActualWidth, (int)cnvCanvas.ActualHeight, 0, Brushes.Transparent));
-            cnvCanvas.Children.Insert(1, GeometryFigure.CreateRectangle(25, 25, 100, 100, 0, Brushes.Cyan));
+            var cpBrush = new SolidColorBrush(cpColor.SelectedColor);
+            cnvCanvas.Children.Clear();
+            cnvCanvas.Children.Add(GeometryFigure.CreateRectangle(0, 0, (int)cnvCanvas.ActualWidth, (int)cnvCanvas.ActualHeight, 0, Brushes.Transparent));
+            if ((bool)chbArrowUp.IsChecked)
+                cnvCanvas.Children.Add(GeometryFigure.CreateRectangle(Center - sldrWidth.Value * RelativeUnit / 2, 
+                                                                        Center - (sldrGap.Value + sldrLen.Value) * RelativeUnit, 
+                                                                        sldrWidth.Value * RelativeUnit, 
+                                                                        sldrLen.Value * RelativeUnit, 
+                                                                        0, cpBrush));
+            if ((bool)chbArrowLeftf.IsChecked)
+                cnvCanvas.Children.Add(GeometryFigure.CreateRectangle(Center - (sldrLen.Value + sldrGap.Value) * RelativeUnit,
+                                                                        Center - sldrWidth.Value * RelativeUnit / 2,
+                                                                        sldrLen.Value * RelativeUnit, 
+                                                                        sldrWidth.Value * RelativeUnit,
+                                                                        0, cpBrush));
+            if ((bool)chbArrowDown.IsChecked)
+                cnvCanvas.Children.Add(GeometryFigure.CreateRectangle(Center - sldrWidth.Value * RelativeUnit / 2, 
+                                                                        Center + sldrGap.Value * RelativeUnit,
+                                                                        sldrWidth.Value * RelativeUnit,
+                                                                        sldrLen.Value * RelativeUnit,
+                                                                        0, cpBrush));
+            if ((bool)chbArrowRight.IsChecked)
+                cnvCanvas.Children.Add(GeometryFigure.CreateRectangle(Center + sldrGap.Value * RelativeUnit ,
+                                                                        Center - sldrWidth.Value * RelativeUnit / 2,
+                                                                        sldrLen.Value * RelativeUnit,
+                                                                        sldrWidth.Value * RelativeUnit,
+                                                                        0, cpBrush));
         }
-        private void SaveCanvasImage()
-        {
-            Microsoft.Win32.SaveFileDialog saveimg = new Microsoft.Win32.SaveFileDialog();
-            saveimg.DefaultExt = ".PNG";
-            saveimg.Filter = "Image (.PNG)|*.PNG";
-            if (saveimg.ShowDialog() == true)
-            {
-                ToImageSource(cnvCanvas, saveimg.FileName);
-            }
-        }
+        
         public static void ToImageSource(Canvas canvas, string filename)
         {
             RenderTargetBitmap bmp = new RenderTargetBitmap((int)canvas.ActualWidth, (int)canvas.ActualHeight, 96d, 96d, PixelFormats.Pbgra32);
@@ -65,9 +89,23 @@ namespace CrosshairDesktopWPF.Views
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            SaveCanvasImage();
+            ToImageSource(cnvCanvas, System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "CurrentCross.png"));
             spCanvas.InvalidateArrange();//Необходимо для того, чтобы после сохранения не канвас не менял местоположение
         }
+
+        private void Cross_ShapeChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            if(InitFlag)
+                DrawCross();
+        }
+
+        private void Cross_Changed(object sender, RoutedEventArgs e)
+        {
+            if (InitFlag)
+                DrawCross();
+        }
+
+        
     }
 
 }

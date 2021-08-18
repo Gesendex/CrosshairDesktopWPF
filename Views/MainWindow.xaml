@@ -8,7 +8,8 @@
         xmlns:cnvt="clr-namespace:CrosshairDesktopWPF.Views.DataConverters"
         xmlns:colorpicker="clr-namespace:ColorPicker;assembly=ColorPicker"
         mc:Ignorable="d"
-        Title="CrosshairCreator" Height="450" Width="800" Background="Purple" Loaded="Window_Loaded">
+        Title="CrosshairCreator" Height="500" Width="800" Background="Purple" 
+        Loaded="Window_Loaded">
     <Window.Resources>
         <cnvt:BoolToVisibilityConverter x:Key="BoolToVisibility"/>
     </Window.Resources>
@@ -44,27 +45,32 @@
                     <!--Source="pack://application:,,,/Crosshairs/red-crosshair-png-8.png"-->
                 </StackPanel>
                 <StackPanel Orientation ="Horizontal">
-                    <CheckBox Content="Arrow up"   Style="{DynamicResource CheckBoxArrowSettings}" IsChecked="True" />
-                    <CheckBox Content="Arrow down" Style="{StaticResource CheckBoxArrowSettings}" IsChecked="True"/>
+                    <CheckBox x:Name="chbArrowUp" Content="Arrow up"   Style="{DynamicResource CheckBoxArrowSettings}" IsChecked="True" Unchecked="Cross_Changed" Checked="Cross_Changed" />
+                    <CheckBox x:Name="chbArrowDown" Content="Arrow down" Style="{StaticResource CheckBoxArrowSettings}" IsChecked="True" Unchecked="Cross_Changed" Checked="Cross_Changed" />
                 </StackPanel>
                 <StackPanel Orientation ="Horizontal">
-                    <CheckBox Content="Arrow left" Style="{StaticResource CheckBoxArrowSettings}" IsChecked="True"/>
-                    <CheckBox Content="Arrow right" Style="{StaticResource CheckBoxArrowSettings}" IsChecked="True"/>
+                    <CheckBox x:Name="chbArrowLeftf" Content="Arrow left" Style="{StaticResource CheckBoxArrowSettings}" IsChecked="True" Unchecked="Cross_Changed" Checked="Cross_Changed" />
+                    <CheckBox x:Name="chbArrowRight" Content="Arrow right" Style="{StaticResource CheckBoxArrowSettings}" IsChecked="True" Unchecked="Cross_Changed" Checked="Cross_Changed" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="Color: " Width="50" Margin="20,0,0,0" Style="{StaticResource TextBlockSliderSettings}"/>
-                    <colorpicker:PortableColorPicker x:Name="cpColor" SelectedColor="Cyan" HorizontalAlignment="Left"/>
+                    <colorpicker:PortableColorPicker x:Name="cpColor" SelectedColor="Cyan" HorizontalAlignment="Left" ColorChanged="Cross_Changed" />
                 </StackPanel>
                 <TextBlock Text="Lenght" Style="{StaticResource TextBlockSliderSettings}"/>
-                <Slider Maximum="20" SmallChange="1" Value="{Binding Lenght, UpdateSourceTrigger=PropertyChanged}"/>
+                <Slider x:Name="sldrLen" Maximum="20" SmallChange="1" 
+                        Value="{Binding Lenght, UpdateSourceTrigger=PropertyChanged}" ValueChanged="Cross_ShapeChanged"/>
                 <TextBlock Text="Width" Style="{StaticResource TextBlockSliderSettings}"/>
-                <Slider SmallChange="1" Value="{Binding Width, UpdateSourceTrigger=PropertyChanged}"/>
-                <TextBlock Text="Gap"  Style="{StaticResource TextBlockSliderSettings}"/>
-                <Slider Maximum="20" SmallChange="1" Value="{Binding Gap, UpdateSourceTrigger=PropertyChanged}"/>
+                <Slider x:Name="sldrWidth" SmallChange="1" 
+                        Value="{Binding Width, UpdateSourceTrigger=PropertyChanged}" ValueChanged="Cross_ShapeChanged"/>
+                <TextBlock Text="Gap" Style="{StaticResource TextBlockSliderSettings}"/>
+                <Slider x:Name="sldrGap" Maximum="20" SmallChange="1" 
+                        Value="{Binding Gap, UpdateSourceTrigger=PropertyChanged}" ValueChanged="Cross_ShapeChanged"/>
+                <TextBlock Text="Size" Style="{StaticResource TextBlockSliderSettings}"/>
+                <Slider x:Name="sldrSize" SmallChange="1" 
+                        Value="{Binding WidthCH, UpdateSourceTrigger=PropertyChanged}" Maximum="100" Minimum="20"/>
                 <StackPanel Orientation="Horizontal">
                     <Button Content="Save" Style="{StaticResource ButtonSettings}" Click="Button_Click"/>
                 </StackPanel>
-            
             </StackPanel>
         </StackPanel>
     </Grid>

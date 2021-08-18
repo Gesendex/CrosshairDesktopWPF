@@ -31,6 +31,16 @@ namespace CrosshairDesktopWPF.ViewModels
         #endregion
         #region _currentCross
         private CustomCrosshair _currentCross;
+        public int WidthCH
+        {
+            get { return _currentCross.WidthCH; }
+            set { _currentCross.WidthCH = value; }
+        }
+        public int HeightCH
+        {
+            get { return _currentCross.HeightCH; }
+            set { _currentCross.HeightCH = value; }
+        }
 
         public int Lenght
         {
@@ -56,7 +66,6 @@ namespace CrosshairDesktopWPF.ViewModels
         #endregion
         #region cnvCanvas
         private Canvas _cnvCanvas;
-
         public Canvas CnvCanvas
         {
             get { return _cnvCanvas; }
@@ -65,7 +74,6 @@ namespace CrosshairDesktopWPF.ViewModels
 
         #endregion
         #endregion
-
         #region Commands
         #endregion
         public MainWindowViewModel()
