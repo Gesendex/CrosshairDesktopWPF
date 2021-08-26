@@ -96,6 +96,7 @@ namespace CrosshairDesktopWPF.ViewModels
                 BitmapImage image = new BitmapImage();
                 image.BeginInit();
                 image.CacheOption = BitmapCacheOption.OnLoad;
+                image.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
                 image.UriSource = new Uri(current);
                 image.EndInit();
                 CrossWindow.im.BeginInit();

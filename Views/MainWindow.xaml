@@ -10,6 +10,7 @@
         mc:Ignorable="d"
         Title="CrosshairCreator" Height="500" Width="800" Background="Purple" 
         Loaded="Window_Loaded">
+    
     <Window.Resources>
         <cnvt:BoolToVisibilityConverter x:Key="BoolToVisibility"/>
     </Window.Resources>
