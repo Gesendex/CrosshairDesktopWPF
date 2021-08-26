@@ -1,0 +1,14 @@
+﻿<Window x:Class="CrosshairDesktopWPF.Views.CrosshairWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CrosshairDesktopWPF.Views"
+        mc:Ignorable="d"
+        Name="CrossWin"
+        Title="CrosshairWindow" Height="450" Width="{Binding ElementName=CrossWin, Path=ActualHeight}"
+        WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="Manual" Topmost="True" AllowsTransparency="True" IsHitTestVisible="False" ShowInTaskbar="False">
+    <Grid>
+        <Image x:Name="im"/>
+    </Grid>
+</Window>

@@ -22,8 +22,8 @@
             <ColumnDefinition Width="4*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0" Margin="1">
-            <RadioButton x:Name="rbCreate" Content="Create crosshair" IsChecked="True" Style="{StaticResource RadioButtonMenu}"/>
-            <RadioButton x:Name="rbSettings" Content="Settings"  Style="{StaticResource RadioButtonMenu}"/>
+            <RadioButton x:Name="rbCreate" Content="Create crosshair" IsEnabled="{Binding IsCrossWindowClosed}" IsChecked="True" Style="{StaticResource RadioButtonMenu}"/>
+            <RadioButton x:Name="rbSettings" Content="Settings" IsEnabled="{Binding IsCrossWindowClosed}" Style="{StaticResource RadioButtonMenu}"/>
         </StackPanel>
         <StackPanel Grid.Column="1" Margin="4">
             <StackPanel Orientation="Horizontal" Margin="4" 
@@ -40,10 +40,12 @@
             </StackPanel>
             <StackPanel Orientation="Vertical" Margin="4"  
                         Visibility="{Binding ElementName=rbCreate, Path=IsChecked , Converter={StaticResource BoolToVisibility}}">
-                <StackPanel x:Name="spCanvas" Background="White">
-                    <Canvas x:Name="cnvCanvas" Width="150" Height="150" HorizontalAlignment="Center"/>
+                <DockPanel x:Name="spCanvas" Height="150" Background="White">
+                    <Canvas x:Name="cnvCanvas" Width="{Binding WidthCH, UpdateSourceTrigger=PropertyChanged}" 
+                            Height="{Binding WidthCH, UpdateSourceTrigger=PropertyChanged}" 
+                            HorizontalAlignment="Center"/>
                     <!--Source="pack://application:,,,/Crosshairs/red-crosshair-png-8.png"-->
-                </StackPanel>
+                </DockPanel>
                 <StackPanel Orientation ="Horizontal">
                     <CheckBox x:Name="chbArrowUp" Content="Arrow up"   Style="{DynamicResource CheckBoxArrowSettings}" IsChecked="True" Unchecked="Cross_Changed" Checked="Cross_Changed" />
                     <CheckBox x:Name="chbArrowDown" Content="Arrow down" Style="{StaticResource CheckBoxArrowSettings}" IsChecked="True" Unchecked="Cross_Changed" Checked="Cross_Changed" />
@@ -66,11 +68,19 @@
                 <Slider x:Name="sldrGap" Maximum="20" SmallChange="1" 
                         Value="{Binding Gap, UpdateSourceTrigger=PropertyChanged}" ValueChanged="Cross_ShapeChanged"/>
                 <TextBlock Text="Size" Style="{StaticResource TextBlockSliderSettings}"/>
-                <Slider x:Name="sldrSize" SmallChange="1" 
-                        Value="{Binding WidthCH, UpdateSourceTrigger=PropertyChanged}" Maximum="100" Minimum="20"/>
+                <Slider x:Name="sldrSize" SmallChange="1" ValueChanged="Cross_ShapeChanged"
+                        Value="{Binding WidthCH, UpdateSourceTrigger=PropertyChanged}" Maximum="150" Minimum="40"/>
                 <StackPanel Orientation="Horizontal">
-                    <Button Content="Save" Style="{StaticResource ButtonSettings}" Click="Button_Click"/>
+                    <Button Content="Save" IsEnabled="{Binding IsCrossWindowClosed}" Style="{StaticResource ButtonSettings}" Click="Button_Click"/>
+                    <Button Content="Draw current crosshair" IsEnabled="{Binding IsCrossWindowClosed}" Style="{StaticResource ButtonSettings}" Command="{Binding OpenCrosshairWindow}"/>
+                    <Button Content="Close crosshair" Style="{StaticResource ButtonSettings}" Command="{Binding CloseCrosshairWindow}"/>
                 </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="4"  
+                        Visibility="{Binding ElementName=rbSettings, Path=IsChecked , Converter={StaticResource BoolToVisibility}}">
+                <TextBlock Text="Display height: " Width="130" FontSize="16" Foreground="AntiqueWhite"/>
+                <TextBox Width="100" FontSize="16"
+                         Text="{Binding DisplayHeight}"/>
             </StackPanel>
         </StackPanel>
     </Grid>

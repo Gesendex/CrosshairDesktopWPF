@@ -9,11 +9,18 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using CrosshairDesktopWPF.Views;
+using System.Windows.Media.Imaging;
+using System.IO;
 
 namespace CrosshairDesktopWPF.ViewModels
 {
     class MainWindowViewModel : BaseVM
     {
+        #region Commands
+        public RelayCommand OpenCrosshairWindow { get; set; }
+        public RelayCommand CloseCrosshairWindow { get; set; }
+        #endregion
         #region Properties
         #region DisplaySize
         private Size DisplaySize;
@@ -34,12 +41,12 @@ namespace CrosshairDesktopWPF.ViewModels
         public int WidthCH
         {
             get { return _currentCross.WidthCH; }
-            set { _currentCross.WidthCH = value; }
+            set { _currentCross.WidthCH = value; OnPropertyChanged(); }
         }
         public int HeightCH
         {
             get { return _currentCross.HeightCH; }
-            set { _currentCross.HeightCH = value; }
+            set { _currentCross.HeightCH = value; OnPropertyChanged(); }
         }
 
         public int Lenght
@@ -64,22 +71,54 @@ namespace CrosshairDesktopWPF.ViewModels
             set { _currentCross.ColorCH = value; OnPropertyChanged(); }
         }
         #endregion
-        #region cnvCanvas
-        private Canvas _cnvCanvas;
-        public Canvas CnvCanvas
+        #region IsCrossWindowOpen
+        public bool IsCrossWindowClosed
         {
-            get { return _cnvCanvas; }
-            set { _cnvCanvas = value; }
+            get { return CrossWindow == null; }
         }
-
+        #endregion
+        #region CrossWindow
+        public CrosshairWindow CrossWindow { get; set; }
         #endregion
         #endregion
-        #region Commands
-        #endregion
+        
         public MainWindowViewModel()
         {
+            OpenCrosshairWindow = new RelayCommand(o =>
+            {
+                CrossWindow = new CrosshairWindow();
+                CrossWindow.WindowStartupLocation = WindowStartupLocation.Manual;
+                CrossWindow.Top = (DisplayHeight - _currentCross.HeightCH) / 2;
+                CrossWindow.Left = (DisplayWidth - _currentCross.WidthCH) / 2;
+                OnPropertyChanged("IsCrossWindowClosed");
+                CrossWindow.Height = CrossWindow.Width = _currentCross.WidthCH;
+                string current = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "CurrentCross.png");
+                BitmapImage image = new BitmapImage();
+                image.BeginInit();
+                image.CacheOption = BitmapCacheOption.OnLoad;
+                image.UriSource = new Uri(current);
+                image.EndInit();
+                CrossWindow.im.BeginInit();
+                CrossWindow.im.Stretch = Stretch.Fill;
+                CrossWindow.im.Source = image;
+                Drawing drawing = new ImageDrawing(image, new Rect(0, 0, _currentCross.WidthCH, _currentCross.HeightCH));
+                CrossWindow.Background = new DrawingBrush(drawing);
+
+
+                CrossWindow.Show();
+            });
+            CloseCrosshairWindow = new RelayCommand(o =>
+            {
+                if (CrossWindow != null)
+                {
+                    CrossWindow.Close();
+                    CrossWindow = null;
+                    string current = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "CurrentCross.png");
+                    OnPropertyChanged("IsCrossWindowClosed");
+                }
+            });
             DisplaySize = new Size(1920, 1080);
-            _currentCross = new CustomCrosshair(40, 40, 10, 3, 4, Color.FromRgb(0,0,0));
+            _currentCross = new CustomCrosshair(150, 150, 10, 3, 4, Color.FromRgb(0,0,0));
         }
     }
 }
