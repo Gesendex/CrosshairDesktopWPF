@@ -114,6 +114,19 @@ namespace CrosshairDesktopWPF.Views
             if (InitFlag)
                 DrawCross();
         }
+
+        private void DockPanel_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                DragMove();
+            }
+        }
+
+        private void btMinimize_Click(object sender, RoutedEventArgs e)
+        {
+                WindowState = WindowState.Minimized;
+        }
     }
 
 }

@@ -20,6 +20,7 @@ namespace CrosshairDesktopWPF.ViewModels
         #region Commands
         public RelayCommand OpenCrosshairWindow { get; set; }
         public RelayCommand CloseCrosshairWindow { get; set; }
+        public RelayCommand CloseMainWindow { get; set; }
         #endregion
         #region Properties
         #region DisplaySize
@@ -118,6 +119,12 @@ namespace CrosshairDesktopWPF.ViewModels
                     OnPropertyChanged("IsCrossWindowClosed");
                 }
             });
+            CloseMainWindow = new RelayCommand(o =>
+            {
+                CloseCrosshairWindow.Execute(null);
+                Application.Current.Shutdown();
+            });
+
             DisplaySize = new Size(1920, 1080);
             _currentCross = new CustomCrosshair(150, 150, 10, 3, 4, Color.FromRgb(0,0,0));
         }
