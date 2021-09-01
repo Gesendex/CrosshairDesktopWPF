@@ -71,6 +71,7 @@
                         Visibility="{Binding ElementName=rbCreate, Path=IsChecked , Converter={StaticResource BoolToVisibility}}">
                 <DockPanel x:Name="spCanvas" Height="150" Background="White">
                     <Canvas x:Name="cnvCanvas" Width="{Binding WidthCH, UpdateSourceTrigger=PropertyChanged}" 
+                            MaxHeight="150" MaxWidth="150"
                             Height="{Binding WidthCH, UpdateSourceTrigger=PropertyChanged}" 
                             HorizontalAlignment="Center"/>
                     <!--Source="pack://application:,,,/Crosshairs/red-crosshair-png-8.png"-->
