@@ -32,7 +32,7 @@
             <ColumnDefinition Width="4*"/>
         </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0" Grid.Row="1" Margin="1,1,1,1" Grid.RowSpan="2" >
-            <RadioButton x:Name="rbCreate" Content="Create crosshair" IsEnabled="{Binding IsCrossWindowClosed}" IsChecked="True" Style="{StaticResource RadioButtonMenu}"/>
+            <RadioButton x:Name="rbCreate" Content="Create crosshair" IsChecked="True" IsEnabled="{Binding IsCrossWindowClosed}"  Style="{StaticResource RadioButtonMenu}"/>
             <RadioButton x:Name="rbSettings" Content="Settings" IsEnabled="{Binding IsCrossWindowClosed}" Style="{StaticResource RadioButtonMenu}"/>
         </StackPanel>
         <DockPanel Grid.ColumnSpan="5" Background="#200550" MouseDown="DockPanel_MouseDown">
@@ -60,14 +60,12 @@
             <StackPanel Orientation="Horizontal" Margin="4" 
                         Visibility="{Binding ElementName=rbSettings, Path=IsChecked , Converter={StaticResource BoolToVisibility}}">
                 <TextBlock Text="Display width: " Width="130" FontSize="16" Foreground="AntiqueWhite"/>
-                <TextBox Width="100" FontSize="16"
-                         Text="{Binding DisplayWidth}"/>
+                <TextBox Width="100" FontSize="16" Text="{Binding DisplayWidth}"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="4"  
                         Visibility="{Binding ElementName=rbSettings, Path=IsChecked , Converter={StaticResource BoolToVisibility}}">
                 <TextBlock Text="Display height: " Width="130" FontSize="16" Foreground="AntiqueWhite"/>
-                <TextBox Width="100" FontSize="16"
-                         Text="{Binding DisplayHeight}"/>
+                <TextBox Width="100" FontSize="16" Text="{Binding DisplayHeight}"/>
             </StackPanel>
             <StackPanel Orientation="Vertical" Margin="4"  
                         Visibility="{Binding ElementName=rbCreate, Path=IsChecked , Converter={StaticResource BoolToVisibility}}">
@@ -109,9 +107,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="4"  
                         Visibility="{Binding ElementName=rbSettings, Path=IsChecked , Converter={StaticResource BoolToVisibility}}">
-                <TextBlock Text="Display height: " Width="130" FontSize="16" Foreground="AntiqueWhite"/>
-                <TextBox Width="100" FontSize="16"
-                         Text="{Binding DisplayHeight}"/>
+ 
             </StackPanel>
         </StackPanel>
     </Grid>
