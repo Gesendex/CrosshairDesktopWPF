@@ -25,6 +25,7 @@ namespace CrosshairDesktopWPF.Views
     public partial class MainWindow : Window
     {
         public double Center { get; set; }
+        public double SizeMultiplier { get; set; }
         public bool InitFlag { get; set; }
         public MainWindow()
         {
@@ -41,42 +42,40 @@ namespace CrosshairDesktopWPF.Views
         private void DrawCross()
         {
             Center = cnvCanvas.ActualWidth / 2;
+            SizeMultiplier = cnvCanvas.ActualWidth / cnvCanvas.MaxWidth;
+
+            double width = sldrWidth.Value * SizeMultiplier;
+            double len = sldrLen.Value * SizeMultiplier;
+            double gap = sldrGap.Value * SizeMultiplier;
+
             var cpBrush = new SolidColorBrush(cpColor.SelectedColor);
             cnvCanvas.Children.Clear();
-            cnvCanvas.Children.Add(GeometryFigure.CreateRectangle(0, 0, (int)cnvCanvas.ActualWidth, (int)cnvCanvas.ActualHeight, 0, Brushes.Transparent));
-            if ((bool)chbArrowUp.IsChecked)
-            {
-                cnvCanvas.Children.Add(GeometryFigure.CreateRectangle(Center - sldrWidth.Value / 2, 
-                                                                        Center - (sldrGap.Value + sldrLen.Value), 
-                                                                        sldrWidth.Value, 
-                                                                        sldrLen.Value, 
+            cnvCanvas.Children.Add(GeometryFigure.CreateRectangle(0, 0, cnvCanvas.ActualWidth, cnvCanvas.ActualHeight, 0, Brushes.Transparent));
+            if (chbArrowUp.IsChecked.Value)
+            {//UpArr
+                cnvCanvas.Children.Add(GeometryFigure.CreateRectangle(Center - width / 2, Center - (gap + len),
+                                                                        width, len, 
                                                                         0, cpBrush));
             }
 
-            if ((bool)chbArrowLeftf.IsChecked)
-            {
-                cnvCanvas.Children.Add(GeometryFigure.CreateRectangle(Center - (sldrLen.Value + sldrGap.Value),
-                                                                        Center - sldrWidth.Value/ 2,
-                                                                        sldrLen.Value, 
-                                                                        sldrWidth.Value,
+            if (chbArrowLeftf.IsChecked.Value)
+            {//LeftArr
+                cnvCanvas.Children.Add(GeometryFigure.CreateRectangle(Center - (len + gap), Center - width / 2,
+                                                                        len, width,
                                                                         0, cpBrush));
             }
 
-            if ((bool)chbArrowDown.IsChecked)
-            {
-                cnvCanvas.Children.Add(GeometryFigure.CreateRectangle(Center - sldrWidth.Value/ 2, 
-                                                                        Center + sldrGap.Value,
-                                                                        sldrWidth.Value,
-                                                                        sldrLen.Value,
+            if (chbArrowDown.IsChecked.Value)
+            {//DownArr
+                cnvCanvas.Children.Add(GeometryFigure.CreateRectangle(Center - width / 2,  Center + gap,
+                                                                        width,len,
                                                                         0, cpBrush));
             }
 
-            if ((bool)chbArrowRight.IsChecked)
-            {
-                cnvCanvas.Children.Add(GeometryFigure.CreateRectangle(Center + sldrGap.Value,
-                                                                        Center - sldrWidth.Value/ 2,
-                                                                        sldrLen.Value,
-                                                                        sldrWidth.Value,
+            if (chbArrowRight.IsChecked.Value)
+            {//RightArr
+                cnvCanvas.Children.Add(GeometryFigure.CreateRectangle(Center + gap, Center - width / 2,
+                                                                        len, width,
                                                                         0, cpBrush));
             }
         }
@@ -125,7 +124,7 @@ namespace CrosshairDesktopWPF.Views
 
         private void btMinimize_Click(object sender, RoutedEventArgs e)
         {
-                WindowState = WindowState.Minimized;
+            WindowState = WindowState.Minimized;
         }
     }
 
