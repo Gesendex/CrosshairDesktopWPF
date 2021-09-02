@@ -36,6 +36,7 @@
             <RadioButton x:Name="rbSettings" Content="Settings" IsEnabled="{Binding IsCrossWindowClosed}" Style="{StaticResource RadioButtonMenu}"/>
         </StackPanel>
         <DockPanel Grid.ColumnSpan="5" Background="#200550" MouseDown="DockPanel_MouseDown">
+            <Image Source="/Views/aim.png" Margin="3"/>
             <TextBlock Text="CrosshairCreator" Margin="3,0" FontSize="22" Foreground="White"/>
             
             <Button x:Name="btClose" 
