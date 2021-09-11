@@ -87,12 +87,13 @@ namespace CrosshairDesktopWPF.ViewModels
         {
             OpenCrosshairWindow = new RelayCommand(o =>
             {
+                double windowSize = 150;
                 CrossWindow = new CrosshairWindow();
                 CrossWindow.WindowStartupLocation = WindowStartupLocation.Manual;
-                CrossWindow.Top = (DisplayHeight - _currentCross.HeightCH) / 2;
-                CrossWindow.Left = (DisplayWidth - _currentCross.WidthCH) / 2;
+                CrossWindow.Top = (DisplayHeight - windowSize) / 2;
+                CrossWindow.Left = (DisplayWidth - windowSize) / 2;
                 OnPropertyChanged("IsCrossWindowClosed");
-                CrossWindow.Height = CrossWindow.Width = 150;
+                CrossWindow.Height = CrossWindow.Width = windowSize;
                 string current = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "CurrentCross.png");
                 BitmapImage image = new BitmapImage();
                 image.BeginInit();
@@ -103,7 +104,7 @@ namespace CrosshairDesktopWPF.ViewModels
                 CrossWindow.im.BeginInit();
                 CrossWindow.im.Stretch = Stretch.Fill;
                 CrossWindow.im.Source = image;
-                Drawing drawing = new ImageDrawing(image, new Rect(0, 0, _currentCross.WidthCH, _currentCross.HeightCH));
+                Drawing drawing = new ImageDrawing(image, new Rect(0, 0, windowSize, windowSize));
                 CrossWindow.Background = new DrawingBrush(drawing);
 
 
