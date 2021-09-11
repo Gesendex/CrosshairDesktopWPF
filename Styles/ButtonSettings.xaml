@@ -15,6 +15,9 @@
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Cursor" Value="Hand"/>
                         </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Background" Value="#582e85"/>
+                        </Trigger>
                     </ControlTemplate.Triggers>
                     <Grid>
                         <Border Margin="2" Background="{TemplateBinding Background}" BorderThickness="2" BorderBrush="DarkGray">
