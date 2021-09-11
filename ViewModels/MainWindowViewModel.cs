@@ -92,7 +92,7 @@ namespace CrosshairDesktopWPF.ViewModels
                 CrossWindow.Top = (DisplayHeight - _currentCross.HeightCH) / 2;
                 CrossWindow.Left = (DisplayWidth - _currentCross.WidthCH) / 2;
                 OnPropertyChanged("IsCrossWindowClosed");
-                CrossWindow.Height = CrossWindow.Width = _currentCross.WidthCH;
+                CrossWindow.Height = CrossWindow.Width = 150;
                 string current = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "CurrentCross.png");
                 BitmapImage image = new BitmapImage();
                 image.BeginInit();
