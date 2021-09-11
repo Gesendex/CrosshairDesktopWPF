@@ -42,7 +42,7 @@ namespace CrosshairDesktopWPF.Views
         private void DrawCross()
         {
             Center = cnvCanvas.ActualWidth / 2;
-            SizeMultiplier = cnvCanvas.ActualWidth / cnvCanvas.MaxWidth;
+            SizeMultiplier = sldrSize.Value / sldrSize.Maximum;
 
             double width = sldrWidth.Value * SizeMultiplier;
             double len = sldrLen.Value * SizeMultiplier;
